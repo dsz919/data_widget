@@ -36,7 +36,7 @@ widget = (function(){
 
                     var key_input = document.createElement('input');
                     key_input.type = "text";
-                    key_input.name = "account_id";
+                    key_input.name = "github_data_url";
                     key_input.style.margin = "10px";
 
                     var widget_id_input = document.createElement('input');
@@ -52,6 +52,9 @@ widget = (function(){
                     form.appendChild(widget_id_input);
                     form.appendChild(submit_button);
                     widget.appendChild(form);
+                }
+                else{
+                    console.log("got no-null config: " + json_config);
                 }
             };
 
