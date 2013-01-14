@@ -54,7 +54,24 @@ widget = (function(){
                     widget.appendChild(form);
                 }
                 else{
-                    console.log("got no-null config: " + json_config);
+                    console.log("DATA widget! got no-null config: " + json_config);
+                    var config_object = jQuery.parseJSON(json_config);
+                    console.log("got this: " + config_object + " url: " + config_object.github_data_url);
+                    var data_url = config_object.github_data_url
+                    $.ajax({
+                        url: data_url,
+                        cache: false
+                    }).done(function(github_data_json) {
+                        if(github_data_json === ""){
+                            console.log("no github data found!");
+                        }
+                        github_data_object = jQuery.parseJSON(github_data_json);
+                        console.log("result: " + github_data_json);
+                        var number_of_commits = github_data_json.length;
+                        console.log("num commits: " + github_data_json.length);
+                        widget.innerHTML = "<h1 style='margin:10px;color:red;'>Commits: " + number_of_commits + "</h1>";
+                    });
+
                 }
             };
 
