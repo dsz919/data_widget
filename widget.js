@@ -54,7 +54,7 @@ widget = (function(){
                     widget.appendChild(form);
                 }
                 else{
-                    console.log("DATA widget! got no-null config: " + json_config);
+                    console.log("DATA widget! got non-null config: " + json_config);
                     var config_object = jQuery.parseJSON(json_config);
                     console.log("got this: " + config_object + " url: " + config_object.github_data_url);
                     var data_url = config_object.github_data_url
@@ -69,7 +69,12 @@ widget = (function(){
                         console.log("result: " + github_data_json);
                         var number_of_commits = github_data_json.length;
                         console.log("num commits: " + github_data_json.length);
-                        widget.innerHTML = "<h1 style='margin:10px;color:red;'>Commits: " + number_of_commits + "</h1>";
+                        var innerhtml = "<h1 style='margin:10px;color:red;'>Commits: " + number_of_commits + "</h1>"
+                        var data_url_split = data_url.split('/');
+                        innerhtml = innerhtml + "<br/><span style='margin:10px;font-size:8pt;'>project: " + data_url_split[5] + "</span>";
+                        //innerhtml = innerhtml + '<br><a href="https://github.com/login/oauth/authorize?client_id=0fe25fd8f1a07dec0d1c">authorize</a>'
+                        //innerhtml = innerhtml + '<br><a href="https://github.com/login/oauth/access_token?client_id=0fe25fd8f1a07dec0d1c">access_token</a>'
+                        widget.innerHTML = innerhtml;
                     });
 
                 }
